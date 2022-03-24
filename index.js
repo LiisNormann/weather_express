@@ -48,8 +48,15 @@ app.all('/', function (req,res){
         .then(data => {
             res.render('index', data)
         })
-        .catch(error =>{
-            res.render( 'index', {error: 'Problem with getting data, try again!!'})
+        .catch(error => {
+            let errorMessage
+            if(city === '') {
+                errorMessage = 'Please fill in a city name!'
+            } else {
+                errorMessage = 'Problem with getting data, try again!'
+            }
+
+            res.render( 'index', {error: errorMessage})
         })
 })
 
